@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정부 안내서비스 포털</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans leading-normal tracking-normal">
+    <!-- 헤더 -->
+    <header class="bg-blue-900 text-white shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">🏛️ 행정안전부 안내서비스 포털</h1>
+            <span class="text-sm bg-blue-700 px-3 py-1 rounded-full">블루 등급 연습 세트</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <!-- 외부 리소스 (카드뉴스 이미지 임베드) -->
+        <section class="mb-12">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">📌 주요 안전 및 생활 캠페인 카드뉴스</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white p-2 rounded shadow flex flex-col items-center">
+                    <img src="카드뉴스1.png" alt="카드뉴스 1" class="rounded w-full h-auto object-cover mb-2">
+                    <span class="text-xs text-gray-500">생활안전 캠페인</span>
+                </div>
+                <div class="bg-white p-2 rounded shadow flex flex-col items-center">
+                    <img src="카드뉴스2.png" alt="카드뉴스 2" class="rounded w-full h-auto object-cover mb-2">
+                    <span class="text-xs text-gray-500">어린이 안전</span>
+                </div>
+                <div class="bg-white p-2 rounded shadow flex flex-col items-center">
+                    <img src="카드뉴스3.png" alt="카드뉴스 3" class="rounded w-full h-auto object-cover mb-2">
+                    <span class="text-xs text-gray-500">교통 안전</span>
+                </div>
+                <div class="bg-white p-2 rounded shadow flex flex-col items-center">
+                    <img src="카드뉴스4.png" alt="카드뉴스 4" class="rounded w-full h-auto object-cover mb-2">
+                    <span class="text-xs text-gray-500">화재 예방</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 검색 및 필터 영역 -->
+        <section class="bg-white p-6 rounded-lg shadow mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div class="w-full md:w-1/2">
+                <label class="block text-sm font-medium text-gray-700 mb-1">🔍 키워드 검색 (카테고리 또는 문의기관)</label>
+                <input type="text" id="searchInput" placeholder="예: 민원, 보건복지부, 국토교통부..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="filterCards()">
+            </div>
+            <div class="w-full md:w-auto text-right">
+                <span id="resultCount" class="text-lg font-semibold text-blue-800">결과 7건</span>
+            </div>
+        </section>
+
+        <!-- 카테고리 카드 그리드 -->
+        <section>
+            <h2 class="text-xl font-bold text-gray-800 mb-4">📂 안내서비스 카테고리 현황</h2>
+            <div id="cardContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 카드 데이터 아이템 -->
+                <div class="category-card bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-600" data-category="민원" data-org="국토교통부">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">민원</h3>
+                    <p class="text-gray-600 mb-1">서비스 건수: <span class="font-semibold text-gray-900">5건</span></p>
+                    <p class="text-gray-600">대표 문의기관: <span class="font-semibold text-blue-700">국토교통부</span></p>
+                </div>
+                <div class="category-card bg-white rounded-lg shadow-md p-6 border-l-4 border-green-600" data-category="복지" data-org="보건복지부">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">복지</h3>
+                    <p class="text-gray-600 mb-1">서비스 건수: <span class="font-semibold text-gray-900">4건</span></p>
+                    <p class="text-gray-600">대표 문의기관: <span class="font-semibold text-blue-700">보건복지부</span></p>
+                </div>
+                <div class="category-card bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-600" data-category="세금" data-org="지자체">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">세금</h3>
+                    <p class="text-gray-600 mb-1">서비스 건수: <span class="font-semibold text-gray-900">3건</span></p>
+                    <p class="text-gray-600">대표 문의기관: <span class="font-semibold text-blue-700">지자체</span></p>
+                </div>
+                <div class="category-card bg-white rounded-lg shadow-md p-6 border-l-4 border-indigo-600" data-category="교통" data-org="국토교통부">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">교통</h3>
+                    <p class="text-gray-600 mb-1">서비스 건수: <span class="font-semibold text-gray-900">3건</span></p>
+                    <p class="text-gray-600">대표 문의기관: <span class="font-semibold text-blue-700">국토교통부</span></p>
+                </div>
+                <div class="category-card bg-white rounded-lg shadow-md p-6 border-l-4 border-red-600" data-category="재난" data-org="국세청">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">재난</h3>
+                    <p class="text-gray-600 mb-1">서비스 건수: <span class="font-semibold text-gray-900">3건</span></p>
+                    <p class="text-gray-600">대표 문의기관: <span class="font-semibold text-blue-700">국세청</span></p>
+                </div>
+                <div class="category-card bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-600" data-category="일자리" data-org="지자체">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">일자리</h3>
+                    <p class="text-gray-600 mb-1">서비스 건수: <span class="font-semibold text-gray-900">3건</span></p>
+                    <p class="text-gray-600">대표 문의기관: <span class="font-semibold text-blue-700">지자체</span></p>
+                </div>
+                <div class="category-card bg-white rounded-lg shadow-md p-6 border-l-4 border-teal-600" data-category="교육" data-org="지자체">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">교육</h3>
+                    <p class="text-gray-600 mb-1">서비스 건수: <span class="font-semibold text-gray-900">3건</span></p>
+                    <p class="text-gray-600">대표 문의기관: <span class="font-semibold text-blue-700">지자체</span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+        <p>&copy; 2026 행정안전부 안내서비스 포털. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function filterCards() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.category-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category').toLowerCase();
+                const org = card.getAttribute('data-org').toLowerCase();
+                
+                if (category.includes(query) || org.includes(query)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            document.getElementById('resultCount').innerText = `결과 ${visibleCount}건`;
+        }
+    </script>
+</body>
+</html>
